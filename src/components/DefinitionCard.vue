@@ -17,7 +17,7 @@ const props = defineProps({
         <div
           class="definition"
           v-for="(definition, index) in meaning.definitions"
-          :key="results[0].meanings.indexOf(definition)"
+          :key="index"
         >
          {{index + 1}}. {{definition.definition }}
              <div v-if="definition.example" class="example">'{{definition.example}}'</div>
@@ -49,10 +49,12 @@ main {
 }
 
 .example {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-style: italic;
   color: #696969;
-  margin: 10px 0;
+  margin: 15px 10px;
+  border-left: solid 5px;
+  padding-left: 10px;
 }
 
 .definitionContainer {
