@@ -2,9 +2,10 @@
 const props = defineProps({
   results: Array,
 });
-  let obj = props.results[0].phonetics.find(o => o.audio !== "");
+  let audioExists = props.results[0].phonetics
 
 function audioplay () {
+  let obj = props.results[0].phonetics.find(o => o.audio !== "")
 if (obj) {
   let audio = new Audio(obj.audio);
   audio.play();
@@ -18,7 +19,7 @@ if (obj) {
     <article class="definitionContainer">
       <div class="wordandsound">
       <h2 class="word">{{ results[0].word }}</h2>
-      <button v-if='obj' @click="audioplay" type="button"><i class="fa-solid fa-volume-high fa-2xl"></i></button>
+      <button v-if='audioExists' @click="audioplay" type="button"><i class="fa-solid fa-volume-high fa-2xl"></i></button>
       </div>
       <div class="pronunciation">{{ results[0].phonetic }}</div>
       <div
@@ -52,7 +53,8 @@ main {
 }
 
 .word {
-  font-size: 35px;
+  font-size: 40px;
+  letter-spacing: 2.5px;
 }
 
 button {
@@ -82,7 +84,8 @@ button {
   font-size: 1.2em;
   font-style: italic;
   color: #696969;
-  margin: 15px 10px;
+  margin: 15px 0px;
+  margin-left: 25px;
   border-left: solid 5px;
   padding-left: 10px;
 }
