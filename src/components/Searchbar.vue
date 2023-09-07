@@ -5,14 +5,27 @@ import DefinitionCard from './DefinitionCard.vue';
 let input = ref('');
 let results = ref(null);
 
-function apiRes() {
-  fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/` + input.value)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      results.value = data;
-    });
+function apiRes(){
+  $.ajax({
+    url: 'https://api.dictionaryapi.dev/api/v2/entries/en/' + input.value,
+    type:"GET",
+    success: function(response){
+      results.value = response
+      console.log(response)
+    }
+  })
 }
+
+// Using the native Fetch Function:
+
+// function apiRes() {
+//   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/` + input.value)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       console.log(data);
+//       results.value = data;
+//     });
+// }
 
 onMounted(() => {
   apiRes();

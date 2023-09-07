@@ -2,12 +2,24 @@
 const props = defineProps({
   results: Array,
 });
+  let obj = props.results[0].phonetics.find(o => o.audio !== "");
+
+function audioplay () {
+if (obj) {
+  let audio = new Audio(obj.audio);
+  audio.play();
+}
+
+}
 </script>
 
 <template>
   <main>
     <article class="definitionContainer">
+      <div class="wordandsound">
       <h2 class="word">{{ results[0].word }}</h2>
+      <button v-if='obj' @click="audioplay" type="button"><i class="fa-solid fa-volume-high fa-2xl"></i></button>
+      </div>
       <div class="pronunciation">{{ results[0].phonetic }}</div>
       <div
         v-for="meaning in results[0].meanings"
@@ -33,10 +45,28 @@ main {
   justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
+} 
+
+.pronunciation {
+  margin: 10px 0px;
 }
 
 .word {
   font-size: 35px;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+
+.wordandsound {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
 }
 
 .definition {
